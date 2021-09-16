@@ -6,6 +6,7 @@ const Board = () => {
     console.log(board);
 
     const [isNext, setIsNext] = useState(false);
+    console.log('board rerender');
 
     const handleSquareClick = (position) => {
         // To Update to a Value state
@@ -62,4 +63,6 @@ const Board = () => {
     )
 }
 
-export default Board
+export default Board;
+
+
