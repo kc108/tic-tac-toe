@@ -6,10 +6,15 @@ import { calculateWinner } from "./helpers";
 
 import "./styles/root.scss"
 
+
+
+const NEW_GAME = [
+  { board: Array(9).fill(null), isXNext: true },
+];
+
 const App = () => {
 
-  const [history, setHistory] = useState([ {board: Array(9).fill(null), isXNext: true},
-   ]);
+  const [history, setHistory] = useState(NEW_GAME);
 
   // Used to set Index of history Array of Objects above 
   const [currentMove, setCurrentMove] = useState(0);
@@ -30,7 +35,7 @@ const App = () => {
   // const winner = calculateWinner(board);
   // console.log(winner);
 
-  const winner = calculateWinner(current.board);
+  const { winner, winningSquares } = calculateWinner(current.board);
 
       const  handleSquareClick = (position) => {
           // To Update to a Value state
@@ -76,13 +81,20 @@ const App = () => {
         setCurrentMove(move);
       }
 
+      const onNewGame = () => {
+        setHistory(NEW_GAME);
+        setCurrentMove(0);
+      }
+
+
       return (
         <div className="app">
           <h1>TIC TAC TOE</h1>
           <StatusMessage winner={winner} current={current}/>
           {/* changed when implementing 'Game History' logic */}
           {/* <Board board={board} handleSquareClick={handleSquareClick} /> */}
-          <Board board={current.board} handleSquareClick={handleSquareClick} />
+          <Board board={current.board} handleSquareClick={handleSquareClick} winningSquares={winningSquares} />
+          <button type="button" onClick={onNewGame}>Start New Game</button>
           <History history={history} moveTo={moveTo} currentMove={currentMove} />
         </div>
       );
