@@ -11,9 +11,11 @@ const Square = ({ value, onClick, isWinningSquare }) => {
         <div>
             <button 
             type="button" 
-            className="square" 
+            // className="square" 
             onClick={onClick}
-            style={{fontWeight: isWinningSquare ? 'bold' : 'normal'}}
+            // Changed to use SASS Dynamic styling
+            // style={{fontWeight: isWinningSquare ? 'bold' : 'normal'}}
+            className={`square ${isWinningSquare ? 'winning' : ''} ${value === 'X' ? 'text-green' : 'text-orange' }`}
             >
             { value }
             </button>
